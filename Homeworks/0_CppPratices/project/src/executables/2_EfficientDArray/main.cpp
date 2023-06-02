@@ -32,7 +32,7 @@ int main(int argc, char** argv) {
 	b.DeleteAt(0);
 	b.Print();
 	b.PushBack(22);
-	b.SetSize(5);
+	b.SetSize(65);
 	b.Print();
 
 	DArray c;

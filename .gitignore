@@ -6,6 +6,7 @@ students/
 _deps/
 documents/
 samples/
+bin/
 
 *Config.h
 
