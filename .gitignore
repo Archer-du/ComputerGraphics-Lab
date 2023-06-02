@@ -4,6 +4,8 @@ lib/
 students/
 .vs/
 _deps/
+documents/
+samples/
 
 *Config.h
 
