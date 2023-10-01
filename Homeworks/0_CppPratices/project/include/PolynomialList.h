@@ -14,39 +14,51 @@
 #include <string>
 #include <vector>
 
-class DECLSPEC_PolynomialList PolynomialList
-{
+using namespace std;
+
+class DECLSPEC_PolynomialList PolynomialList {
+private:
+    struct PolynomialTerm {
+        int exp;
+        double coe;
+
+        PolynomialTerm(int exp, double coe) : exp(exp), coe(coe) { }
+        PolynomialTerm() : PolynomialTerm(0, 0) { }
+    };
+    void AddOneTerm(const PolynomialTerm& term); // add one term into m_Polynomial
+
 public:
     PolynomialList() { };
     PolynomialList(const PolynomialList& other);
     PolynomialList(const std::string& file); // initialization using file
-    PolynomialList(const double* cof, const int* deg, int n);
-    PolynomialList(const std::vector<int>& deg, const std::vector<double>& cof);
-
-    double& coff(int i);
-    double coff(int i) const;
-
-    void compress();
 
     // overload
-    PolynomialList operator+(const PolynomialList& right) const; //Overload operator +
-    PolynomialList operator-(const PolynomialList& right) const; //Overload operator -
-    PolynomialList operator*(const PolynomialList& right) const; //Overload operator *
+    PolynomialList& operator+(const PolynomialList& right) const; //Overload operator +
+    PolynomialList& operator-(const PolynomialList& right) const; //Overload operator -
+    PolynomialList& operator*(const PolynomialList& right) const; //Overload operator *
     PolynomialList& operator=(const PolynomialList& right); //Overload operator =
 
     void Print() const;
 
-private:
-    struct Term {
-        int deg;
-        double cof;
-
-        Term(int deg, double cof) : deg(deg), cof(cof) { }
-        Term() : Term(0, 0) { }
-    };
-    bool ReadFromFile(const std::string& file);
-    Term& AddOneTerm(const Term& term); // add one term into m_Polynomial
+    list<PolynomialTerm>::const_iterator Begin() const;
+    list<PolynomialTerm>::const_iterator End() const;
 
 private:
-    std::list<Term> m_Polynomial; // high degree -> low degree
+    list<PolynomialTerm> termList; // high degree -> low degree
+
+private:
+    void Sort() {
+        termList.sort([](const PolynomialTerm& term1, const PolynomialTerm& term2) 
+            { return term1.exp < term2.exp; });
+    }
+    void Merge() {
+        auto it = termList.begin();
+        while (next(it) != termList.end()) {
+            if (it->exp == next(it)->exp) {
+                it->coe += next(it)->coe;
+                it = termList.erase(next(it));
+            }
+            else it++;
+        }
+    }
 };

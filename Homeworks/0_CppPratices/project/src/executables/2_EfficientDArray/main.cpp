@@ -1,7 +1,7 @@
 #include "DArray.h"
 
 int main(int argc, char** argv) {
-	DArray a;
+	DArray<double> a;
 	a.InsertAt(0, 2.1);
 	a.Print();
 
@@ -15,18 +15,18 @@ int main(int argc, char** argv) {
 	a.InsertAt(0, 4.1);
 	a.Print();
 
-	DArray acopy = a; // ´Ë´¦ÓÃµ½ÁË¿½±´¹¹Ôìº¯Êı
+	DArray<double> acopy = a; // æ­¤å¤„ç”¨åˆ°äº†æ‹·è´æ„é€ å‡½æ•°
 	acopy.Print();
 
-	DArray acopy2(a); // ¸ÃÓï¾äµÈÍ¬ÓÚÉÏÃæµÄÓï¾ä£¬¶¼ÊÇ³õÊ¼»¯
+	DArray<double> acopy2(a); // è¯¥è¯­å¥ç­‰åŒäºä¸Šé¢çš„è¯­å¥ï¼Œéƒ½æ˜¯åˆå§‹åŒ–
 	acopy2.Print();
 
-	DArray acopy3, acopy4;
-	acopy4 = acopy3 = a; // ´Ë´¦ÓÃµ½ÁË¸³Öµ²Ù×÷·ûºÅ"="µÄÖØÔØ
+	DArray<double> acopy3, acopy4;
+	acopy4 = acopy3 = a; // æ­¤å¤„ç”¨åˆ°äº†èµ‹å€¼æ“ä½œç¬¦å·"="çš„é‡è½½
 	acopy3.Print();
 	acopy4.Print();
 
-	DArray b;
+	DArray<int> b;
 	b.PushBack(21);
 	b.Print();
 	b.DeleteAt(0);
@@ -35,7 +35,7 @@ int main(int argc, char** argv) {
 	b.SetSize(65);
 	b.Print();
 
-	DArray c;
+	DArray<char> c;
 	c.PushBack('a');
 	c.PushBack('b');
 	c.PushBack('c');
